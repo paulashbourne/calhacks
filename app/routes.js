@@ -26,12 +26,30 @@ router.get('/', function(req, res) {
 router.route('/users')
   .post(function(req, res) {
     var user = new User({
-      name : req.body.name
+      name : { 
+        first : req.body.first_name,
+        last  : req.body.last_name,
+      },
+      address : {
+        street : req.body.street_address,
+        city   : req.body.city,
+        state  : req.body.state,
+        zip    : req.body.state
+      },
+      phone   : req.body.phone,
+      items   : []
     });
     user.save(function(err) {
       if (err)
         res.send(err);
       res.json({ message: 'User created!' });
+    });
+  })
+  .get(function(req, res) {
+    User.find(function(err, users) {
+      if (err)
+        res.send(err);
+      res.json(users);
     });
   });
 
