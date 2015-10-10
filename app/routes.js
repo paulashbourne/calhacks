@@ -1,10 +1,11 @@
 var express = require('express');
+var moment  = require('moment');
 
 var router = express.Router();
 
 router.use(function(req, res, next) {
-  var datestr = Date.now();
-  console.log(req.method + ' ' + req.path + '['+datestr+']');
+  var datestr = moment().format('MMMM Do YYYY, h:mm:ss a');
+  console.log('['+datestr+']  ' + req.method + ' ' + req.path);
   next();
 });
 
