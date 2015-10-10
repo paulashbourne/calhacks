@@ -1,6 +1,10 @@
-var express = require('express');
+var express   = require('express');
+var mongoose  = require('mongoose');
+
+var constants = require('./app/constants');
+
 var app = express();
-var mongoose = require('mongoose');
+app.constants = constants;
 mongoose.connect('mongodb://paulashbourne.com/calhacks');
 
 require('./app/routes.js')(app);

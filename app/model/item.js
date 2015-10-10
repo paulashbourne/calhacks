@@ -2,8 +2,7 @@ var mongoose  = require('mongoose')
 var BaseModel = require('./base')
 
 var ItemSchema = new mongoose.Schema({
-
-    user_id     : ObjectId,
+    user_id     : mongoose.Schema.ObjectId,
     title       : String,
     description : String,
     state       : Number,

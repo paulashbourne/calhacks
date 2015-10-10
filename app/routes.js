@@ -26,6 +26,8 @@ router.get('/', function(req, res) {
 router.route('/users')
   .post(function(req, res) {
     var user = new User({
+      email : req.body.email,
+      password : User.encrypt_password(req.body.password),
       name : { 
         first : req.body.first_name,
         last  : req.body.last_name,
@@ -50,6 +52,15 @@ router.route('/users')
       if (err)
         res.send(err);
       res.json(users);
+    });
+  });
+
+router.route('/users/:id')
+  .get(function(req, res) {
+    User.findById(req.params.id, function(err, user) {
+      if (err)
+        res.send(err);
+      res.json(user);
     });
   });
 
