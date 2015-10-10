@@ -4,20 +4,16 @@ var BaseModel = require('./base')
 var crypto    = require('crypto')
 
 var UserSchema = new mongoose.Schema({
-  email: String,
-  password: String,
-  name: {
-    first : String,
-    last  : String
-  },
-  address: {
-    street : String,
-    city   : String,
-    state  : String,
-    zip  : String
-  },
-  phone: String,
-  items: [{
+  email          : String,
+  password       : String,
+  first_name     : String,
+  last_name      : String,
+  street_address : String,
+  city           : String,
+  state          : String,
+  zip            : String,
+  phone          : String,
+  items          : [{
     type : mongoose.Schema.ObjectId,
     ref  : 'Item'
   }]

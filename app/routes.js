@@ -26,20 +26,16 @@ router.get('/', function(req, res) {
 router.route('/users')
   .post(function(req, res) {
     var user = new User({
-      email : req.body.email,
-      password : User.encrypt_password(req.body.password),
-      name : { 
-        first : req.body.first_name,
-        last  : req.body.last_name,
-      },
-      address : {
-        street : req.body.street_address,
-        city   : req.body.city,
-        state  : req.body.state,
-        zip    : req.body.zip
-      },
-      phone   : req.body.phone,
-      items   : []
+      email          : req.body.email,
+      password       : User.encrypt_password(req.body.password),
+      first_name     : req.body.first_name,
+      last_name      : req.body.last_name,
+      street_address : req.body.street_address,
+      city           : req.body.city,
+      state          : req.body.state,
+      zip            : req.body.zip,
+      phone          : req.body.phone,
+      items          : []
     });
     user.save(function(err) {
       if (err)
