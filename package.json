@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/paulashbourne/calhacks#readme",
   "dependencies": {
+    "body-parser": "^1.14.1",
     "express": "^4.13.3",
+    "moment": "^2.10.6",
     "mongoose": "^4.1.10",
     "postmates": "^1.0.2"
   }

@@ -1,13 +1,16 @@
 var mongoose  = require('mongoose')
-var BaseModel = require('./app/model/base')
-var FacilitySchema = require('mongoose').model('Facility').schema
+var BaseModel = require('./base')
 
 var ItemSchema = new mongoose.Schema({
+
     user_id     : ObjectId,
     title       : String,
     description : String,
-    state       : int,
-    facility_id : ObjectId,
+    state       : Number,
+    facility    : {
+      type : mongoose.Schema.ObjectId,
+      ref  : 'Facility'
+    },
     images      : [{
       // https://gist.github.com/aheckmann/2408370
       data        : Buffer,
@@ -16,4 +19,6 @@ var ItemSchema = new mongoose.Schema({
     quote_id: String
 })
 
-module.exports = mongoose.model('Item', ItemSchema)
+var Item = BaseModel('Item', ItemSchema)
+
+module.exports = Item;

@@ -5,6 +5,7 @@ mongoose.connect('mongodb://paulashbourne.com/calhacks');
 
 require('./app/routes.js')(app);
 
-app.listen(8002, function () {
-  console.log('Hacks is running, yo');
+var PORT = 8002;
+app.listen(PORT, function () {
+  console.log('Server is running on port ' + PORT);
 });
