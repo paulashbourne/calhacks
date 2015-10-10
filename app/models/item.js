@@ -7,8 +7,12 @@ var ItemSchema = new Schema({
     title       : String,
     description : String,
     state       : int,
-    photos      : [String],
     facility    : FacilitySchema
+    images      : [{
+      // https://gist.github.com/aheckmann/2408370
+      data        : Buffer,
+      contentType : String
+    }]
 })
 
 module.exports = mongoose.model('Item', ItemSchema)
