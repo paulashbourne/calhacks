@@ -34,7 +34,7 @@ router.route('/users')
         street : req.body.street_address,
         city   : req.body.city,
         state  : req.body.state,
-        zip    : req.body.state
+        zip    : req.body.zip
       },
       phone   : req.body.phone,
       items   : []
