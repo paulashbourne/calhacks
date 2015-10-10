@@ -49,3 +49,5 @@ Thumbs.db
 # Source files #
 ################
 src/
+
+node_modules/
