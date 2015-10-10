@@ -1,8 +1,6 @@
 var mongoose  = require('mongoose')
 var BaseModel = require('./base')
 
-var ItemSchema = mongoose.model('Item').schema
-
 var UserSchema = new mongoose.Schema({
     name: {
         first : String,
@@ -15,9 +13,12 @@ var UserSchema = new mongoose.Schema({
         zip    : String
     },
     phone: String,
-    items: [ItemSchema]
+    items: [{
+      type : mongoose.Schema.ObjectId,
+      ref  : 'Item'
+    }]
 });
 
 var User = BaseModel('User', UserSchema);
 
-module.exports = User
+module.exports = User;

@@ -1,14 +1,14 @@
 var mongoose  = require('mongoose')
 var BaseModel = require('./base')
 
-var FacilitySchema = require('mongoose').model('Facility').schema
-
 var ItemSchema = new mongoose.Schema({
-    user_id     : String
     title       : String,
     description : String,
-    state       : int,
-    facility    : FacilitySchema
+    state       : Number,
+    facility    : {
+      type : mongoose.Schema.ObjectId,
+      ref  : 'Facility'
+    },
     images      : [{
       // https://gist.github.com/aheckmann/2408370
       data        : Buffer,
@@ -16,4 +16,6 @@ var ItemSchema = new mongoose.Schema({
     }]
 })
 
-module.exports = mongoose.model('Item', ItemSchema)
+var Item = BaseModel('Item', ItemSchema)
+
+module.exports = Item;
