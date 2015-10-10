@@ -1,5 +1,5 @@
 var mongoose  = require('mongoose')
-var BaseModel = require('./app/model/base')
+var BaseModel = require('./base')
 
 var FacilitySchema = new mongoose.Schema({
     description : String
