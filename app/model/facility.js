@@ -1,8 +1,8 @@
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema
+var mongoose  = require('mongoose')
+var BaseModel = require('./app/model/base')
 
-var FacilitySchema = new Schema({
+var FacilitySchema = new mongoose.Schema({
     description : String
 })
 
-module.exports = mongoose.model('Facility', FacilitySchema)
+module.exports = BaseModel('Facility', FacilitySchema)

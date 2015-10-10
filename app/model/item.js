@@ -1,8 +1,8 @@
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema
+var mongoose  = require('mongoose')
+var BaseModel = require('./app/model/base')
 var FacilitySchema = require('mongoose').model('Facility').schema
 
-var ItemSchema = new Schema({
+var ItemSchema = new mongoose.Schema({
     user_id     : String
     title       : String,
     description : String,
