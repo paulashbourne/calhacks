@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
+var ItemSchema = require('mongoose').model('Item').schema
 
 var UserSchema = new Schema({
     name: {
@@ -12,7 +13,8 @@ var UserSchema = new Schema({
         state  : String,
         zip    : String
     },
-    phone: String
+    phone: String,
+    items: [ItemSchema]
 })
 
 module.exports = mongoose.model('User', UserSchema)
