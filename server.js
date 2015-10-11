@@ -21,7 +21,7 @@ require('./app/routes/router')(app, io);
 
 
 // Set up http server
-var port = 8002;
+var port = 80;
 // Socket
 
 
