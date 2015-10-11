@@ -4,7 +4,7 @@ var _        = require('underscore');
 var async    = require('async');
 
 var http = require('http')
-var io   = require(http)
+var io   = require('socket.io')(http)
 
 module.exports = function(router) {
   router.route('/postmates')
