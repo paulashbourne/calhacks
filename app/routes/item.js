@@ -3,7 +3,7 @@ var postmates = require('../postmates')
 var async = require('async')
 
 module.exports = function(router) {
-  router.route('/item')
+  router.route('/items')
     .post(function(req, res) {
       var params = req.body;
       var item = new Item(params);

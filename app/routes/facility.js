@@ -1,7 +1,7 @@
 var Facility = require('../model/facility');
 
 module.exports = function(router) {
-  router.route('/facility')
+  router.route('/facilities')
     .post(function(req, res) {
       var params = req.body;
       var facility = new Facility(params);
@@ -19,7 +19,7 @@ module.exports = function(router) {
       });
     })
 
-  router.route('/facilitys/:id')
+  router.route('/facilities/:id')
     .get(function(req, res) {
       Facility.findById(req.params.id, function(err, facility) {
         if (err)
