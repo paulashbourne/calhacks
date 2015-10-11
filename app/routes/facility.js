@@ -1,4 +1,5 @@
 var Facility = require('../model/facility');
+var _ = require('underscore')
 
 module.exports = function(router) {
   router.route('/facilities')
@@ -12,10 +13,10 @@ module.exports = function(router) {
       });
     })
     .get(function(req, res) {
-      Facility.find(function(err, facilitys) {
+      Facility.find(function(err, facilities) {
         if (err)
           res.send(err);
-        res.json(facilitys);
+        res.json(facilities);
       });
     })
 
@@ -33,7 +34,7 @@ module.exports = function(router) {
         if (err)
           res.send(err);
         _.extend(facility, params);
-        user.save(function(err) {
+        facility.save(function(err) {
           if (err)
             res.send(err);
           res.json(facility);

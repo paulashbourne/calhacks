@@ -2,7 +2,10 @@ var mongoose  = require('mongoose')
 var BaseModel = require('./base')
 
 var ItemSchema = new mongoose.Schema({
-    user_id : mongoose.Schema.ObjectId,
+    user_id : {
+      type     : mongoose.Schema.ObjectId,
+      required : true
+    },
     title : {
       type     : String,
       required : true

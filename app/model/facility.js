@@ -2,14 +2,16 @@ var mongoose  = require('mongoose');
 var BaseModel = require('./base');
 
 var FacilitySchema = new mongoose.Schema({
-    description : {
+    name : {
       type : String
     },
     address : {
-      type : String
+      type : String,
+      required: true
     },
     code : {
-      type : String
+      type : String,
+      required: true
     }
 });
 
