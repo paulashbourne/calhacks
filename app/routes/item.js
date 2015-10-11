@@ -1,4 +1,5 @@
-var Item = require('../model/item');
+var Item      = require('../model/item')
+var Delivery  = require('../model/delivery')
 var postmates = require('../postmates')
 var async = require('async')
 var User = require('../model/user')
@@ -62,7 +63,21 @@ module.exports = function(router) {
         }],
         pickup: ['getUser', 'getFacility', function(callback, results) {
           postmates.pickup(results.getUser, results.getItem, results.getFacility, callback)
-        }]
+        }],
+        saveDelivery: ['pickup', function(callback, results) {
+          var params = results.pickup
+          console.log(params)
+          var delivery = new Delivery({
+            postmates_id : params.id,
+            state        : params.status,
+            pickup_eta   : params.pickup_eta,
+            dropoff_eta  : params.dropoff_eta,
+            complete     : params.complete,
+            courier      : params.courier,
+            items        : [req.params.id]
+          })
+          delivery.save(callback)
+        }],
       }, function(err, results) {
           if (err)
             return res.send(err)
@@ -84,8 +99,21 @@ module.exports = function(router) {
         }],
         pickup: ['getUser', 'getFacility', function(callback, results) {
           postmates.dropoff(results.getUser, results.getItem, results.getFacility, callback)
-        }]
-      }, function(err, results) {
+        }],
+        saveDelivery: ['pickup', function(callback, results) {
+          var params = results.pickup
+          var delivery = new Delivery({
+            postmates_id : params.id,
+            state        : params.status,
+            pickup_eta   : params.pickup_eta,
+            dropoff_eta  : params.dropoff_eta,
+            complete     : params.complete,
+            courier      : params.courier,
+            items        : [req.params.id]
+          })
+          delivery.save(callback)
+        }],
+      }, function(err, res) {
           if (err)
             return res.send(err)
           res.json(results.pickup)
