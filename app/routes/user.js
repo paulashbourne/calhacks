@@ -1,4 +1,5 @@
 var User = require('../model/user');
+var _    = require('underscore');
 
 module.exports = function(router) {
   router.route('/users')
