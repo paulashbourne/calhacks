@@ -12,11 +12,11 @@ var DeliverySchema = new mongoose.Schema({
     },
     pickup_eta : {
       type     : Date,
-      required : true
+      required : false
     },
     dropoff_eta : {
       type     : Date,
-      required : true
+      required : false
     },
     complete : {
       type     : Boolean,
