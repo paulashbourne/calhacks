@@ -15,14 +15,14 @@ module.exports = function(router) {
       var item = new Item(params);
       item.save(function(err) {
         if (err)
-          res.send(err);
+          return res.send(err);
         res.json(item);
       });
     })
     .get(function(req, res) {
       Item.find(function(err, items) {
         if (err)
-          res.send(err);
+          return res.send(err);
         res.json(items);
       });
     })
@@ -31,7 +31,7 @@ module.exports = function(router) {
     .get(function(req, res) {
       Item.findById(req.params.id, function(err, item) {
         if (err)
-          res.send(err);
+          return res.send(err);
         res.json(item);
       });
     })
@@ -58,7 +58,7 @@ module.exports = function(router) {
     .get(function(req, res) {
       Item.findById(req.params.id, function(err, item) {
         if (err)
-          res.send(err)
+          return res.send(err)
         res.contentType(item.images[0].contentType)
         res.send(item.images[0].data)
       });
