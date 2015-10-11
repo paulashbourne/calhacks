@@ -4,14 +4,6 @@ var BaseModel = require('./base')
 var crypto    = require('crypto')
 
 var UserSchema = new mongoose.Schema({
-  email : {
-    type     : String,
-    required : true
-  },
-  password : {
-    type     : String,
-    required : true
-  },
   first_name : {
     type     : String,
     required : true
@@ -31,12 +23,6 @@ var UserSchema = new mongoose.Schema({
   state : {
     type     : String,
     required : true
-  },
-  zip : {
-    type      : String,
-    required  : true,
-    minlength : 5,
-    maxlength : 5
   },
   phone : {
     type     : String,

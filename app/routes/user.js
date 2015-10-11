@@ -4,7 +4,6 @@ module.exports = function(router) {
   router.route('/users')
     .post(function(req, res) {
       var params = req.body;
-      params.password = User.encrypt_password(params.password);
       var user = new User(params);
       user.save(function(err) {
         if (err)
@@ -33,9 +32,6 @@ module.exports = function(router) {
       User.findById(req.params.id, function(err, user) {
         if (err)
           res.send(err);
-        if (params.password) {
-          params.password = User.encrypt_password(params.password);
-        }
         _.extend(user, params);
         user.save(function(err) {
           if (err)
