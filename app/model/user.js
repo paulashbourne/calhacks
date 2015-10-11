@@ -4,6 +4,10 @@ var BaseModel = require('./base')
 var crypto    = require('crypto')
 
 var UserSchema = new mongoose.Schema({
+  socket_id : {
+    type     : String,
+    required : false
+  },
   first_name : {
     type     : String,
     required : true
