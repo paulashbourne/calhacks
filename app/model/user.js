@@ -41,11 +41,7 @@ var UserSchema = new mongoose.Schema({
   phone : {
     type     : String,
     required : true
-  },
-  items : [{
-    type : mongoose.Schema.ObjectId,
-    ref  : 'Item'
-  }]
+  }
 });
 
 var User = BaseModel('User', UserSchema);
