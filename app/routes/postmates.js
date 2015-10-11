@@ -22,6 +22,7 @@ module.exports = function(router) {
           results.getDelivery.save(callback)
         }],
         handleEvent: ['updateDelivery', function(callback, results) {
+          // Update user via socket
           var delivery = results.getDelivery
           switch (res.body.kind) {
             case "event.delivery_status":
