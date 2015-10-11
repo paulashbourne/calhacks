@@ -22,6 +22,7 @@ module.exports = function(router) {
           results.getDelivery.save(callback)
         }],
         handleEvent: ['updateDelivery', function(callback, results) {
+          console.log("wooooooot we got an update")
           // Update user via socket
           var delivery = results.getDelivery
           switch (res.body.kind) {
@@ -37,7 +38,11 @@ module.exports = function(router) {
               // Shouldn't happen
               break;
           }
-        }]
+        }], function(err, results) {
+            if (err)
+              return res.send(err)
+            res.status(200).end()
+        })
       })
     })
 };
