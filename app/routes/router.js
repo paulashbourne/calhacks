@@ -15,6 +15,8 @@ router.use(bodyParser.json());
 
 // Begin endpoints
 require('./user')(router);
+require('./item')(router);
+require('./facility')(router);
 
 module.exports = function (app) {
   app.use('/api', router);
