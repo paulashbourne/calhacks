@@ -49,6 +49,16 @@ module.exports = function(router) {
       });
     });
 
+  router.route('/items/:id/image')
+    .get(function(req, res) {
+      Item.findById(req.params.id, function(err, item) {
+        if (err)
+          res.send(err)
+        res.contentType(item.images[0].contentType)
+        res.send(item.images[0].data)
+      });
+    })
+
   router.route('/items/:id/pickup')
     .post(function(req, res) {
       async.auto({
