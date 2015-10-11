@@ -21,7 +21,7 @@ require('./app/routes/router')(app, io);
 
 
 // Set up http server
-var port = 81;
+var port = process.env.port || 1337;
 // Socket
 
 
