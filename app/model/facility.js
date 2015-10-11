@@ -4,6 +4,12 @@ var BaseModel = require('./base');
 var FacilitySchema = new mongoose.Schema({
     description : {
       type : String
+    },
+    address : {
+      type : String
+    },
+    code : {
+      type : String
     }
 });
 
