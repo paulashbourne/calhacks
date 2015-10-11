@@ -2,7 +2,9 @@ var mongoose  = require('mongoose');
 var BaseModel = require('./base');
 
 var FacilitySchema = new mongoose.Schema({
-    description : String
+    description : {
+      type : String
+    }
 });
 
 var Facility = BaseModel('Facility', FacilitySchema);
