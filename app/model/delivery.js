@@ -2,7 +2,7 @@ var mongoose  = require('mongoose');
 var BaseModel = require('./base');
 
 var DeliverySchema = new mongoose.Schema({
-  user : {
+  user_id : {
     type : mongoose.Schema.ObjectId,
     ref  : 'User'
   },
