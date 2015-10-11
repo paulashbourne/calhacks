@@ -66,31 +66,31 @@ module.exports = function(router) {
     });
 
     router.route('/items/:id/quote')
-    .post(function(req, res) {
-      async.auto({
-        getItem: function(callback) {
-          Item.findById(req.params.id, callback)
-        },
-        getFacility: ['getItem', function(callback, results) {
-          Facility.findById(results.getItem.facility_id.toString())
-        }],
-        getUser: ['getItem', function(callback, results) {
-          User.findById(results.getItem.user_id, callback)
-        }],
-        quote: ['getUser', 'getFacility', function(callback, results) {
-          postmates.generate_quote(resuts.getUser, results.getItem, results.getFacility, callback)
-        }],
-        save: ['quote', function(callback, results) {
-          var item = results.getItem
-          item.quote_id = results.quote.id
-          item.save(function(err) {
-            callback(err)
-          })
-        }]
-      }, function(err, results) {
-          if (err)
-            return res.send(err)
-          res.json(results.quote)
-      })
-    });
+      .post(function(req, res) {
+        async.auto({
+          getItem: function(callback) {
+            Item.findById(req.params.id, callback)
+          },
+          getFacility: ['getItem', function(callback, results) {
+            Facility.findById(results.getItem.facility_id.toString(), callback)
+          }],
+          getUser: ['getItem', function(callback, results) {
+            User.findById(results.getItem.user_id, callback)
+          }],
+          quote: ['getUser', 'getFacility', function(callback, results) {
+            postmates.generate_quote(results.getUser, results.getItem, results.getFacility, callback)
+          }],
+          save: ['quote', function(callback, results) {
+            var item = results.getItem
+            item.quote_id = results.quote.id
+            item.save(function(err) {
+              callback(err)
+            })
+          }]
+        }, function(err, results) {
+            if (err)
+              return res.send(err)
+            res.json(results.quote)
+        })
+      });
 };
