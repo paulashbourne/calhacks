@@ -179,5 +179,5 @@ module.exports = function(router) {
               return res.send(err)
             res.json(results.quote)
         })
-      });
+      })
 };

@@ -44,7 +44,6 @@ module.exports = function(router) {
         if (err)
           return res.send(err)
         res.status(200).end()
-        }
       })
     })
 };
