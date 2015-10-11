@@ -56,7 +56,7 @@ module.exports = function(router) {
           User.findById(results.getItem.user_id, callback)
         }],
         pickup: ['getUser', 'getFacility', function(callback, results) {
-          postmates.pickup(resuts.getUser, results.getItem, results.getFacility, callback)
+          postmates.pickup(results.getUser, results.getItem, results.getFacility, callback)
         }]
       }, function(err, res) {
           if (err)
