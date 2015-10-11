@@ -37,7 +37,9 @@ module.exports = function(router) {
           var delivery = results.getDelivery
           switch (params.kind) {
             case "event.delivery_status":
-              io.to(results.getUser.socket_id).emit('update', delivery);
+              io
+                //.to(results.getUser.socket_id)
+                .emit('update', delivery);
             case "event.delivery_deadline":
               break;
             case "event.courier_update":
