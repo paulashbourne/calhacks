@@ -7,7 +7,7 @@ var app = express();
 app.constants = constants;
 mongoose.connect('mongodb://paulashbourne.com/calhacks');
 
-require('./app/routes.js')(app);
+require('./app/routes/router')(app);
 
 var PORT = 8002;
 app.listen(PORT, function () {
