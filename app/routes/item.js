@@ -37,15 +37,20 @@ module.exports = function(router) {
     })
     .put(function(req, res) {
       var params = req.body;
-      Item.findById(req.params.id, function(err, item) {
-        if (err)
-          res.send(err);
-        _.extend(item, params);
-        item.save(function(err) {
-          if (err)
-            res.send(err);
-          res.json(item);
-        });
+      async.auto({
+        getItem : function(callback) {
+          Item.findById(req.params.id, callback);
+        },
+        updateItem : ['getItem', function(callback, results) {
+          _.extend(results.getItem, params);
+          results.getItem.save(callback);
+        }]
+      },
+      function(err, results) {
+        if (err) {
+          return res.send(err);
+        }
+        res.json(results.getItem);
       });
     });
 

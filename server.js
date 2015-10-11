@@ -25,9 +25,16 @@ server.listen(port, function () {
 });
 
 // Socket
+var User = require('./app/model/user')
 io.on('connection', function(socket){
   console.log('a user connected');
   socket.on('disconnect', function() {
     console.log('user disconnected');
+  });
+  socket.on('user_id', function(user_id) {
+    User.findById(user_id, function(err, user) {
+      user.socket_id = socket.id;
+      user.save();
+    });
   });
 });
