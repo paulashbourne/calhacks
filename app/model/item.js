@@ -27,7 +27,7 @@ var ItemSchema = new mongoose.Schema({
       data        : Buffer,
       contentType : String
     }],
-    quote_id :{
+    quote_id : {
       type     : String,
       required : false
     }
