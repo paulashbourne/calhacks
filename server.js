@@ -17,19 +17,16 @@ app.constants = constants;
 mongoose.connect('mongodb://paulashbourne.com/calhacks');
 app.use(express.static('app/public'));
 
+// Set up routes
 require('./app/routes/router')(app, io);
 
-
 // Set up http server
-var port = process.env.port || 1337;
-// Socket
-
-
+var port = process.env.port || 8002;
 server.listen(port, function () {
   console.log('Server is running on port ' + port);
 });
 
-// Set up routes
+// Socket
 var User = require('./app/model/user')
 io.on('connection', function(socket){
   console.log('a user connected');
