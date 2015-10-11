@@ -9,7 +9,7 @@ var constants = require('./app/constants');
 // Initialize app
 var app = express();
 var server = http.Server(app);
-var io        = require('socket.io')(server);
+var io     = require('socket.io')(server);
 
 app.constants = constants;
 
