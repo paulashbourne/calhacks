@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/paulashbourne/calhacks#readme",
   "dependencies": {
+    "async": "^1.4.2",
     "body-parser": "^1.14.1",
     "crypto": "0.0.3",
     "express": "^4.13.3",

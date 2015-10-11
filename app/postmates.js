@@ -1,8 +1,8 @@
 var Postmates = require('postmates')
 var postmates = new Postmates('cus_KWXEdIan-1REM-', '311be434-16a6-408c-8f15-02c5b65d0e7b')
-var User = require('model/user')
-var Item = require('model/item')
-var Facility = require('model/facility')
+var User = require('./model/user')
+var Item = require('./model/item')
+var Facility = require('./model/facility')
 var async = require('async')
 
 exports.pickup = function(user, item, facility, next) {
@@ -12,7 +12,7 @@ exports.pickup = function(user, item, facility, next) {
     pickup_address: user.address.street + ', ' + user.address.city + ', ' + user.address.state,
     pickup_phone_number: user.phone,
     dropoff_name: facility.name,
-    dropoff_address: facility.address
+    dropoff_address: facility.address,
     dropoff_phone_number: "4155796833",
     dropoff_notes: exports.generate_notes(user, item),
     quote_id: item.quote_id
@@ -49,5 +49,5 @@ exports.generate_quote = function(user, item, facility, next) {
 
 
 exports.generate_notes = function(facility) {
-  return "The facility is called " + facility.
+  return "The facility is called " + facility
 }

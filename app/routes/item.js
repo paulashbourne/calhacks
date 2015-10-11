@@ -1,5 +1,6 @@
 var Item = require('../model/item');
 var postmates = require('../postmates')
+var async = require('async')
 
 module.exports = function(router) {
   router.route('/item')
