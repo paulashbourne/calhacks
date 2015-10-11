@@ -9,6 +9,8 @@ router.use(function(req, res, next) {
   console.log('['+datestr+']  ' + req.method + ' ' + req.path);
   next();
 });
+router.user(session({
+}));
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
