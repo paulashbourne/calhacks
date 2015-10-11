@@ -6,9 +6,7 @@ var async    = require('async');
 var http = require('http')
 
 
-module.exports = function(router, app) {
-  var server = http.Server(app);
-  var io   = require('socket.io')(server)
+module.exports = function(router, io) {
   router.route('/postmates')
     .post(function(req, res) {
       var params = req.body;

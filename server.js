@@ -17,7 +17,7 @@ app.constants = constants;
 mongoose.connect('mongodb://paulashbourne.com/calhacks');
 app.use(express.static('app/public'));
 
-require('./app/routes/router')(app);
+require('./app/routes/router')(app, io);
 
 
 // Set up http server

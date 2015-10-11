@@ -19,7 +19,7 @@ require('./item')(router);
 require('./facility')(router);
 require('./delivery')(router);
 
-module.exports = function (app) {
-  require('./postmates')(router, app);
+module.exports = function (app, io) {
+  require('./postmates')(router, io);
   app.use('/api', router);
 };
