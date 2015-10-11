@@ -4,9 +4,11 @@ var _        = require('underscore');
 var async    = require('async');
 
 var http = require('http')
-var io   = require('socket.io')(http)
 
-module.exports = function(router) {
+
+module.exports = function(router, app) {
+  var server = http.Server(app);
+  var io   = require('socket.io')(server)
   router.route('/postmates')
     .post(function(req, res) {
       var params = req.body;

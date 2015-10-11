@@ -18,8 +18,8 @@ require('./user')(router);
 require('./item')(router);
 require('./facility')(router);
 require('./delivery')(router);
-require('./postmates')(router);
 
 module.exports = function (app) {
+  require('./postmates')(router, app);
   app.use('/api', router);
 };
