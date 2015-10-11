@@ -38,10 +38,12 @@ module.exports = function(router) {
               // Shouldn't happen
               break;
           }
-        }], function(err, results) {
-            if (err)
-              return res.send(err)
-            res.status(200).end()
+        }],
+      },
+      function(err, results) {
+        if (err)
+          return res.send(err)
+        res.status(200).end()
         }
       })
     })
