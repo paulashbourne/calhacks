@@ -18,12 +18,7 @@ router.use(function(req, res, next) {
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-// Test endpoint
-router.get('/', function(req, res) {
-  res.json({message: 'Hello World'});   
-});
-
-// Begin actual endpoints
+// Begin endpoints
 router.route('/users')
   .post(function(req, res) {
     var params = req.body;
