@@ -66,7 +66,6 @@ module.exports = function(router) {
         }],
         saveDelivery: ['pickup', function(callback, results) {
           var params = results.pickup
-          console.log(params)
           var delivery = new Delivery({
             postmates_id : params.id,
             state        : params.status,
