@@ -1,6 +1,7 @@
-var Item = require('../model/item');
+var Item      = require('../model/item')
+var Delivery  = require('../model/delivery')
 var postmates = require('../postmates')
-var async = require('async')
+var async     = require('async')
 
 module.exports = function(router) {
   router.route('/items')
@@ -57,7 +58,20 @@ module.exports = function(router) {
         }],
         pickup: ['getUser', 'getFacility', function(callback, results) {
           postmates.pickup(results.getUser, results.getItem, results.getFacility, callback)
-        }]
+        }],
+        saveDelivery: ['pickup', function(callback, results) {
+          var params = results.pickup.body
+          var delivery = new Delivery({
+            postmates_id : params.id,
+            state        : params.status,
+            pickup_eta   : params.pickup_eta,
+            dropoff_eta  : params.dropoff_eta,
+            complete     : params.complete,
+            courier      : params.courier,
+            items        : [req.params.id]
+          })
+          delivery.save(callback)
+        }],
       }, function(err, res) {
           if (err)
             return res.send(err)

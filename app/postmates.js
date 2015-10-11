@@ -1,9 +1,18 @@
-var Postmates = require('postmates')
-var postmates = new Postmates('cus_KVBJk15W29az5-', 'cd58846d-65ed-453f-86e7-84501be458d5')
 var User = require('./model/user')
 var Item = require('./model/item')
 var Facility = require('./model/facility')
 var async = require('async')
+
+var Postmates = require('postmates')
+var CUSTOMER_ID = "cus_KVBJk15W29az5-";
+if (true) {
+  // TEST KEY
+  var API_KEY = "cd58846d-65ed-453f-86e7-84501be458d5";
+} else {
+  // LIVE KEY
+  var API_KEY = "cd58846d-65ed-453f-86e7-84501be458d5";
+}
+var postmates = new Postmates(CUSTOMER_ID, API_KEY)
 
 exports.pickup = function(user, item, facility, next) {
   var delivery = {
