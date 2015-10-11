@@ -12,7 +12,6 @@ module.exports = function(router) {
   router.route('/items')
     .post(function(req, res) {
       var params = req.body;
-      console.log(req.files);
       var item = new Item(params);
       item.save(function(err) {
         if (err)
