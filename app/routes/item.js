@@ -79,9 +79,10 @@ module.exports = function(router) {
         pickup: ['getUser', 'getFacility', function(callback, results) {
           postmates.pickup(results.getUser, results.getItem, results.getFacility, callback)
         }],
-        saveDelivery: ['pickup', function(callback, results) {
+        saveDelivery: ['getUser', 'pickup', function(callback, results) {
           var params = results.pickup
           var delivery = new Delivery({
+            user_id      : results.getUser.id,
             postmates_id : params.id,
             state        : params.status,
             pickup_eta   : params.pickup_eta,

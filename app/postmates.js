@@ -70,7 +70,6 @@ exports.generate_dropoff_quote = function(user, item, facility, next) {
   })
 }
 
-
 exports.generate_notes = function(facility) {
   return "The facility is called " + facility
 }

@@ -1,6 +1,10 @@
 var Delivery = require('../model/delivery');
+var User     = require('../model/user');
 var _        = require('underscore');
 var async    = require('async');
+
+var http = require('http')
+var io   = require(http)
 
 module.exports = function(router) {
   router.route('/postmates')
@@ -10,6 +14,9 @@ module.exports = function(router) {
         getDelivery: function(callback) {
           Delivery.findOne({'postmates_id':params.delivery_id}).exec(callback)
         },
+        getUser : ['getDelivery', function(callback, results) {
+          User.findById(results.getDelivery.user_id, callback);
+        }],
         updateDelivery: ['getDelivery', function(callback, results) {
           var delivery = results.getDelivery;
           _.extend(delivery, {
@@ -22,13 +29,13 @@ module.exports = function(router) {
           });
           delivery.save(callback)
         }],
-        handleEvent: ['updateDelivery', function(callback, results) {
-          console.log("wooooooot we got an update")
+        handleEvent: ['getUser', 'updateDelivery', function(callback, results) {
+          console.log("wooooooo we got an update")
           // Update user via socket
           var delivery = results.getDelivery
           switch (params.kind) {
             case "event.delivery_status":
-              break;
+              io.to(results.getUser.socket_id).emit('update', delivery);
             case "event.delivery_deadline":
               break;
             case "event.courier_update":
