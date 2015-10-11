@@ -1,6 +1,7 @@
 var express    = require('express');
 var moment     = require('moment');
 var bodyParser = require('body-parser');
+var _          = require('underscore');
 
 // Model imports
 var Facility = require('./model/facility');
@@ -25,22 +26,14 @@ router.get('/', function(req, res) {
 // Begin actual endpoints
 router.route('/users')
   .post(function(req, res) {
-    var user = new User({
-      email          : req.body.email,
-      password       : User.encrypt_password(req.body.password),
-      first_name     : req.body.first_name,
-      last_name      : req.body.last_name,
-      street_address : req.body.street_address,
-      city           : req.body.city,
-      state          : req.body.state,
-      zip            : req.body.zip,
-      phone          : req.body.phone,
-      items          : []
-    });
+    var params = req.body;
+    params.password = User.encrypt_password(params.password);
+    params.items = [];
+    var user = new User(params);
     user.save(function(err) {
       if (err)
         res.send(err);
-      res.json({ message: 'User created!' });
+      res.json(user);
     });
   })
   .get(function(req, res) {
@@ -49,7 +42,7 @@ router.route('/users')
         res.send(err);
       res.json(users);
     });
-  });
+  })
 
 router.route('/users/:id')
   .get(function(req, res) {
@@ -57,6 +50,20 @@ router.route('/users/:id')
       if (err)
         res.send(err);
       res.json(user);
+    });
+  })
+  .put(function(req, res) {
+    var params = req.body;
+    User.findById(req.params.id, function(err, user) {
+      if (err)
+        res.send(err);
+      console.log(params);
+      _.extend(user, params);
+      user.save(function(err) {
+        if (err)
+          res.send(err);
+        res.json(user);
+      });
     });
   });
 
