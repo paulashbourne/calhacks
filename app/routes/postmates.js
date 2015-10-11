@@ -5,27 +5,28 @@ var async    = require('async');
 module.exports = function(router) {
   router.route('/postmates')
     .post(function(req, res) {
-      var params = req.body.data;
+      var params = req.body;
       async.auto({
         getDelivery: function(callback) {
-          Delivery.findOne({'delivery_id':params.id}, callback)
+          Delivery.findOne({'postmates_id':params.delivery_id}).exec(callback)
         },
         updateDelivery: ['getDelivery', function(callback, results) {
-          _.extend(results.getDelivery, {
-            postmates_id : params.id,
-            state        : params.status,
-            pickup_eta   : params.pickup_eta,
-            dropoff_eta  : params.dropoff_eta,
-            complete     : params.complete,
-            courier      : params.courier
+          var delivery = results.getDelivery;
+          _.extend(delivery, {
+            postmates_id : params.delivery_id,
+            state        : params.data.status,
+            pickup_eta   : params.data.pickup_eta,
+            dropoff_eta  : params.data.dropoff_eta,
+            complete     : params.data.complete,
+            courier      : params.data.courier
           });
-          results.getDelivery.save(callback)
+          delivery.save(callback)
         }],
         handleEvent: ['updateDelivery', function(callback, results) {
           console.log("wooooooot we got an update")
           // Update user via socket
           var delivery = results.getDelivery
-          switch (res.body.kind) {
+          switch (params.kind) {
             case "event.delivery_status":
               break;
             case "event.delivery_deadline":
@@ -38,6 +39,7 @@ module.exports = function(router) {
               // Shouldn't happen
               break;
           }
+          callback(results)
         }],
       },
       function(err, results) {
