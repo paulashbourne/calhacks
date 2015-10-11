@@ -57,7 +57,6 @@ router.route('/users/:id')
     User.findById(req.params.id, function(err, user) {
       if (err)
         res.send(err);
-      console.log(params);
       _.extend(user, params);
       user.save(function(err) {
         if (err)
