@@ -14,8 +14,16 @@ var DeliverySchema = new mongoose.Schema({
     type     : String,
     required : true
   },
+  pickup_millis : {
+    type     : Number,
+    required : false
+  },
   pickup_eta : {
     type     : Date,
+    required : false
+  },
+  dropoff_millis : {
+    type     : Number,
     required : false
   },
   dropoff_eta : {

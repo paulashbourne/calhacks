@@ -20,12 +20,14 @@ module.exports = function(router) {
         updateDelivery: ['getDelivery', function(callback, results) {
           var delivery = results.getDelivery;
           _.extend(delivery, {
-            postmates_id : params.delivery_id,
-            state        : params.data.status,
-            pickup_eta   : params.data.pickup_eta,
-            dropoff_eta  : params.data.dropoff_eta,
-            complete     : params.data.complete,
-            courier      : params.data.courier
+            postmates_id    : params.delivery_id,
+            state           : params.data.status,
+            pickup_eta      : params.data.pickup_eta,
+            dropoff_eta     : params.data.dropoff_eta,
+            pickup_millis   : delivery.pickup_eta - Date.now(),
+            dropoff_millis  : delivery.dropoff_eta - Date.now(),
+            complete        : params.data.complete,
+            courier         : params.data.courier
           });
           delivery.save(callback)
         }],
